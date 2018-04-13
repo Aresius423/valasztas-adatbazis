@@ -15,12 +15,12 @@ scalacOptions ++= Seq(
   "-Xfatal-warnings"
 )
 
-val slickVersion = "3.2.2"
+val slickVersion = "3.2.3"
 
 libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick"           % slickVersion,
   "com.typesafe.slick" %% "slick-codegen"   % slickVersion,
-  "com.h2database"      % "h2"              % "1.4.185",
+  "com.h2database"      % "h2"              % "1.4.197",
   "ch.qos.logback"      % "logback-classic" % "1.2.3"
 )
 
