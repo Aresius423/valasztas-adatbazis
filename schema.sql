@@ -1,5 +1,5 @@
 -- Mandátumszerző jelöltek
-CREATE TABLE szkepv (
+CREATE TABLE IF NOT EXISTS szkepv (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Mandátum típusa
   -- (1: Egyéni választókerületi mandátum, 2: Országos listás mandátum, 3: Nemzetiségi listás mandátum)
@@ -10,14 +10,14 @@ CREATE TABLE szkepv (
   -- Listás jelölt sorszáma a listán
   lsorsz int NOT NULL
 );
-CREATE INDEX szkepv_mtip ON szkepv (mtip);
-CREATE INDEX szkepv_jlid ON szkepv (jlid);
-CREATE INDEX szkepv_lsorsz ON szkepv (lsorsz);
+CREATE INDEX IF NOT EXISTS szkepv_mtip ON szkepv (mtip);
+CREATE INDEX IF NOT EXISTS szkepv_jlid ON szkepv (jlid);
+CREATE INDEX IF NOT EXISTS szkepv_lsorsz ON szkepv (lsorsz);
 
 -- Számlálásra kijelölt szavazóköri névjegyzéki és megjelenési létszám adatok – „fél”-jegyzőkönyv
 -- (A külképviseleteken leadott és az átjelentkezettek szavazatainak megszámlálására kijelölt
 --  szavazókörök adatai)
-CREATE TABLE sznapi (
+CREATE TABLE IF NOT EXISTS sznapi (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Választás típusa
   -- (J: Egyéni választókerületi választás, L: Listás választás)
@@ -36,13 +36,13 @@ CREATE TABLE sznapi (
   -- A hazai szavazókörökben szavazóként megjelentek száma
   f int NOT NULL
 );
-CREATE INDEX sznapi_valtip ON sznapi (valtip);
-CREATE INDEX sznapi_maz ON sznapi (maz);
-CREATE INDEX sznapi_taz ON sznapi (taz);
-CREATE INDEX sznapi_sorsz ON sznapi (sorsz);
+CREATE INDEX IF NOT EXISTS sznapi_valtip ON sznapi (valtip);
+CREATE INDEX IF NOT EXISTS sznapi_maz ON sznapi (maz);
+CREATE INDEX IF NOT EXISTS sznapi_taz ON sznapi (taz);
+CREATE INDEX IF NOT EXISTS sznapi_sorsz ON sznapi (sorsz);
 
 -- Szavazóköri jegyzőkönyv adatok (listás részletezés)
-CREATE TABLE szavlf (
+CREATE TABLE IF NOT EXISTS szavlf (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   --  Szavazóköri „fej” adatok egyedi azonosítója
   jfid int NOT NULL,
@@ -68,10 +68,10 @@ CREATE TABLE szavlf (
   -- Érvényes szavazólap
   pn int NOT NULL
 );
-CREATE INDEX szavlf_jfid ON szavlf (jfid);
-CREATE INDEX szavlf_jlid ON szavlf (jlid);
+CREATE INDEX IF NOT EXISTS szavlf_jfid ON szavlf (jfid);
+CREATE INDEX IF NOT EXISTS szavlf_jlid ON szavlf (jlid);
 
-CREATE TABLE partdelegalt (
+CREATE TABLE IF NOT EXISTS partdelegalt (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   id varchar(24) NOT NULL,
   sorszm int NOT NULL,
@@ -88,15 +88,15 @@ CREATE TABLE partdelegalt (
   jellcsoport varchar(20),
   jellcsopid int
 );
-CREATE INDEX partdelegalt_id ON partdelegalt (id);
-CREATE INDEX partdelegalt_sorszm ON partdelegalt (sorszm);
-CREATE INDEX partdelegalt_maz ON partdelegalt (maz);
-CREATE INDEX partdelegalt_taz ON partdelegalt (taz);
-CREATE INDEX partdelegalt_sorsz ON partdelegalt (sorsz);
-CREATE INDEX partdelegalt_jellcsopid ON partdelegalt (jellcsopid);
+CREATE INDEX IF NOT EXISTS partdelegalt_id ON partdelegalt (id);
+CREATE INDEX IF NOT EXISTS partdelegalt_sorszm ON partdelegalt (sorszm);
+CREATE INDEX IF NOT EXISTS partdelegalt_maz ON partdelegalt (maz);
+CREATE INDEX IF NOT EXISTS partdelegalt_taz ON partdelegalt (taz);
+CREATE INDEX IF NOT EXISTS partdelegalt_sorsz ON partdelegalt (sorsz);
+CREATE INDEX IF NOT EXISTS partdelegalt_jellcsopid ON partdelegalt (jellcsopid);
 
 -- Mandátum számítás kiinduló adatai
-CREATE TABLE hatarszamf (
+CREATE TABLE IF NOT EXISTS hatarszamf (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- 5%-os határszavazat
   hszav1 int NOT NULL,
@@ -109,7 +109,7 @@ CREATE TABLE hatarszamf (
 );
 
 -- Pártok / Országos nemzetiségi önkormányzatok
-CREATE TABLE szervezet (
+CREATE TABLE IF NOT EXISTS szervezet (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Szervezet kód
   szkod int NOT NULL,
@@ -144,12 +144,12 @@ CREATE TABLE szervezet (
   -- ???
   tajaz int
 );
-CREATE INDEX szervezet_szkod ON szervezet (szkod);
-CREATE INDEX szervezet_szpntip ON szervezet (szpntip);
-CREATE INDEX szervezet_rovid ON szervezet (rovid);
+CREATE INDEX IF NOT EXISTS szervezet_szkod ON szervezet (szkod);
+CREATE INDEX IF NOT EXISTS szervezet_szpntip ON szervezet (szpntip);
+CREATE INDEX IF NOT EXISTS szervezet_rovid ON szervezet (rovid);
 
 -- Névjegyzéki statisztikai adatok
-CREATE TABLE nevjegyz (
+CREATE TABLE IF NOT EXISTS nevjegyz (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- szavazóköri névjegyzéken és mozgóurnát igénylők jegyzékén szereplő választópolgárok száma - összesen
   nszossz int NOT NULL,
@@ -209,7 +209,7 @@ CREATE TABLE nevjegyz (
 
 -- Szavazásnapi névjegyzéki listás tétel adatok az átjelentkezéssel és a külföldön leadott
 -- szavazatok megszámlálására kijelölt szavazókörből
-CREATE TABLE sznapilf (
+CREATE TABLE IF NOT EXISTS sznapilf (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Választás típusa
   -- (J: Egyéni választókerületi választás, L: Listás választás)
@@ -232,13 +232,13 @@ CREATE TABLE sznapilf (
   -- A szavazóhelységben és a mozgóurnával szavazó (megjelent) választópolgárok száma
   f int NOT NULL
 );
-CREATE INDEX sznapilf_valtip ON sznapilf (valtip);
-CREATE INDEX sznapilf_maz ON sznapilf (maz);
-CREATE INDEX sznapilf_taz ON sznapilf (taz);
-CREATE INDEX sznapilf_sorsz ON sznapilf (sorsz);
+CREATE INDEX IF NOT EXISTS sznapilf_valtip ON sznapilf (valtip);
+CREATE INDEX IF NOT EXISTS sznapilf_maz ON sznapilf (maz);
+CREATE INDEX IF NOT EXISTS sznapilf_taz ON sznapilf (taz);
+CREATE INDEX IF NOT EXISTS sznapilf_sorsz ON sznapilf (sorsz);
 
 -- Országos listák
-CREATE TABLE tlista (
+CREATE TABLE IF NOT EXISTS tlista (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Országos lista egyedi azonosító
   tlid int NOT NULL,
@@ -272,13 +272,13 @@ CREATE TABLE tlista (
   --  18: Lista törölve (nem jogerős), 19: Lista törölve)
   allapot int NOT NULL
 );
-CREATE INDEX tlista_tlid ON tlista (tlid);
-CREATE INDEX tlista_ltip ON tlista (ltip);
-CREATE INDEX tlista_jlcs ON tlista (jlcs);
-CREATE INDEX tlista_sorsz ON tlista (sorsz);
+CREATE INDEX IF NOT EXISTS tlista_tlid ON tlista (tlid);
+CREATE INDEX IF NOT EXISTS tlista_ltip ON tlista (ltip);
+CREATE INDEX IF NOT EXISTS tlista_jlcs ON tlista (jlcs);
+CREATE INDEX IF NOT EXISTS tlista_sorsz ON tlista (sorsz);
 
 -- OEVK-k (Országgyűlési Egyéni Választókerületek)
-CREATE TABLE oevk (
+CREATE TABLE IF NOT EXISTS oevk (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Megye azonosító
   -- (-> terulet.maz)
@@ -290,10 +290,10 @@ CREATE TABLE oevk (
   -- OEVK székhely település budapesti kerülete
   szekhk varchar(2)
 );
-CREATE INDEX oevk_maz ON oevk (maz);
+CREATE INDEX IF NOT EXISTS oevk_maz ON oevk (maz);
 
 -- Szavazóköri szavazási „tétel” adatok
-CREATE TABLE szavt (
+CREATE TABLE IF NOT EXISTS szavt (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Szavazóköri „fej” adatok egyedi azonosítója
   -- (-> szavf.jfid)
@@ -304,11 +304,11 @@ CREATE TABLE szavt (
   -- Kapott szavazat
   szav int NOT NULL
 );
-CREATE INDEX szavt_jfid ON szavt (jfid);
-CREATE INDEX szavt_jlid ON szavt (jlid);
+CREATE INDEX IF NOT EXISTS szavt_jfid ON szavt (jfid);
+CREATE INDEX IF NOT EXISTS szavt_jlid ON szavt (jlid);
 
 -- Szavazóköri szavazási „fej” adatok
-CREATE TABLE szavf (
+CREATE TABLE IF NOT EXISTS szavf (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Szavazóköri „fej” adatok egyedi azonosítója
   jfid int NOT NULL,
@@ -377,14 +377,14 @@ CREATE TABLE szavf (
   nm int NOT NULL,
   nn int NOT NULL
 );
-CREATE INDEX szavf_jfid ON szavf (jfid);
-CREATE INDEX szavf_valtip ON szavf (valtip);
-CREATE INDEX szavf_maz ON szavf (maz);
-CREATE INDEX szavf_taz ON szavf (taz);
-CREATE INDEX szavf_sorsz ON szavf (sorsz);
+CREATE INDEX IF NOT EXISTS szavf_jfid ON szavf (jfid);
+CREATE INDEX IF NOT EXISTS szavf_valtip ON szavf (valtip);
+CREATE INDEX IF NOT EXISTS szavf_maz ON szavf (maz);
+CREATE INDEX IF NOT EXISTS szavf_taz ON szavf (taz);
+CREATE INDEX IF NOT EXISTS szavf_sorsz ON szavf (sorsz);
 
 -- Jelölőcsoportok tagszervezetei
-CREATE TABLE jlcstag (
+CREATE TABLE IF NOT EXISTS jlcstag (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Jelölőcsoport kód
   -- (-> jlcs.jlcs)
@@ -395,12 +395,12 @@ CREATE TABLE jlcstag (
   -- Tagszervezet sorszáma a jelölőcsoporton belül
   sorsz int NOT NULL
 );
-CREATE INDEX jlcstag_jlcs ON jlcstag (jlcs);
-CREATE INDEX jlcstag_szkod ON jlcstag (szkod);
-CREATE INDEX jlcstag_sorsz ON jlcstag (sorsz);
+CREATE INDEX IF NOT EXISTS jlcstag_jlcs ON jlcstag (jlcs);
+CREATE INDEX IF NOT EXISTS jlcstag_szkod ON jlcstag (szkod);
+CREATE INDEX IF NOT EXISTS jlcstag_sorsz ON jlcstag (sorsz);
 
 -- Összesített adatok szavazási „fej” adatai listás, illetve egyéni választókerületi választás esetén
-CREATE TABLE szeredmf (
+CREATE TABLE IF NOT EXISTS szeredmf (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Összesítő tétel egyedi azonosító
   sfid int NOT NULL,
@@ -465,13 +465,13 @@ CREATE TABLE szeredmf (
   -- (-> ejelolt.eid)
   eid int
 );
-CREATE INDEX szeredmf_sfid ON szeredmf (sfid);
-CREATE INDEX szeredmf_sfmaz ON szeredmf (sfmaz);
-CREATE INDEX szeredmf_valtip ON szeredmf (valtip);
-CREATE INDEX szeredmf_eid ON szeredmf (eid);
+CREATE INDEX IF NOT EXISTS szeredmf_sfid ON szeredmf (sfid);
+CREATE INDEX IF NOT EXISTS szeredmf_sfmaz ON szeredmf (sfmaz);
+CREATE INDEX IF NOT EXISTS szeredmf_valtip ON szeredmf (valtip);
+CREATE INDEX IF NOT EXISTS szeredmf_eid ON szeredmf (eid);
 
 -- Megyék
-CREATE TABLE terulet (
+CREATE TABLE IF NOT EXISTS terulet (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Megye azonosító (sorszám)
   maz varchar(2) NOT NULL,
@@ -480,10 +480,10 @@ CREATE TABLE terulet (
   -- Megye rövid név
   mrnev varchar(10) NOT NULL
 );
-CREATE INDEX terulet_maz ON terulet (maz);
+CREATE INDEX IF NOT EXISTS terulet_maz ON terulet (maz);
 
 -- Az állományokban használt kódok leírása
-CREATE TABLE kodok (
+CREATE TABLE IF NOT EXISTS kodok (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Kódcsoport azonosító
   kodcsop varchar(9) NOT NULL,
@@ -492,11 +492,11 @@ CREATE TABLE kodok (
   -- Kód megnevezése
   szoveg varchar(73) NOT NULL
 );
-CREATE INDEX kodok_kodcsop ON kodok (kodcsop);
-CREATE INDEX kodok_kod ON kodok (kod);
+CREATE INDEX IF NOT EXISTS kodok_kodcsop ON kodok (kodcsop);
+CREATE INDEX IF NOT EXISTS kodok_kod ON kodok (kod);
 
 -- Összesített adatok szavazási „tétel” adatai listás, illetve egyéni választókerületi választás esetén
-CREATE TABLE szeredmt (
+CREATE TABLE IF NOT EXISTS szeredmt (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Összesítő tétel egyedi azonosító
   -- (-> szeredmf.sfid)
@@ -516,11 +516,11 @@ CREATE TABLE szeredmt (
   -- Lista kapott mandátumainak száma
   mand int NOT NULL
 );
-CREATE INDEX szeredmt_sfid ON szeredmt (sfid);
-CREATE INDEX szeredmt_jlid ON szeredmt (jlid);
+CREATE INDEX IF NOT EXISTS szeredmt_sfid ON szeredmt (sfid);
+CREATE INDEX IF NOT EXISTS szeredmt_jlid ON szeredmt (jlid);
 
 -- Jelölőcsoport tagszervezetei megjelenítési sorrendje
-CREATE TABLE jlcssor (
+CREATE TABLE IF NOT EXISTS jlcssor (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Jelölés típusa jelző
   -- (J: Egyéni választókerületi választás, L: Listás választás)
@@ -534,13 +534,13 @@ CREATE TABLE jlcssor (
   -- (-> szervezet.szkod)
   szkod int NOT NULL
 );
-CREATE INDEX jlcssor_tip ON jlcssor (tip);
-CREATE INDEX jlcssor_id ON jlcssor (id);
-CREATE INDEX jlcssor_sorsz ON jlcssor (sorsz);
-CREATE INDEX jlcssor_szkod ON jlcssor (szkod);
+CREATE INDEX IF NOT EXISTS jlcssor_tip ON jlcssor (tip);
+CREATE INDEX IF NOT EXISTS jlcssor_id ON jlcssor (id);
+CREATE INDEX IF NOT EXISTS jlcssor_sorsz ON jlcssor (sorsz);
+CREATE INDEX IF NOT EXISTS jlcssor_szkod ON jlcssor (szkod);
 
 -- Települések
-CREATE TABLE telep (
+CREATE TABLE IF NOT EXISTS telep (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Megye azonosító
   -- (-> terulet.maz)
@@ -557,13 +557,13 @@ CREATE TABLE telep (
   -- (1: Fővárosi kerület, 2: Megyei jogú város, 3: Város, Község)
   ttip int NOT NULL
 );
-CREATE INDEX telep_maz ON telep (maz);
-CREATE INDEX telep_taz ON telep (taz);
-CREATE INDEX telep_ttip ON telep (ttip);
+CREATE INDEX IF NOT EXISTS telep_maz ON telep (maz);
+CREATE INDEX IF NOT EXISTS telep_taz ON telep (taz);
+CREATE INDEX IF NOT EXISTS telep_ttip ON telep (ttip);
 
 -- Jelölő, listát állító jelölőcsoportok
 -- (pártok + 0 = független)
-CREATE TABLE jlcs (
+CREATE TABLE IF NOT EXISTS jlcs (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Jelölőcsoport kód
   -- (-> jlcs.jlcs)
@@ -573,11 +573,11 @@ CREATE TABLE jlcs (
   -- Jelölő csoport tagjainak száma
   tag int NOT NULL
 );
-CREATE INDEX jlcs_jlcs ON jlcs (jlcs);
+CREATE INDEX IF NOT EXISTS jlcs_jlcs ON jlcs (jlcs);
 
 -- Vezérlő adatok
 -- (csak egy rekord van benne, ami az adatbázis jelenlegi állapotának jellemzése)
-CREATE TABLE verzio (
+CREATE TABLE IF NOT EXISTS verzio (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Verziókészítés dátuma, ideje
   -- EEEE.HH.NN.OO:PP:MM
@@ -598,7 +598,7 @@ CREATE TABLE verzio (
 );
 
 -- Szavazókörök
-CREATE TABLE szavkor (
+CREATE TABLE IF NOT EXISTS szavkor (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Megye azonosító
   -- (-> terulet.maz)
@@ -621,13 +621,13 @@ CREATE TABLE szavkor (
   -- Szavazókör településen belüli közismert címe
   cimk varchar(50) NOT NULL
 );
-CREATE INDEX szavkor_maz ON szavkor (maz);
-CREATE INDEX szavkor_taz ON szavkor (taz);
-CREATE INDEX szavkor_sorsz ON szavkor (sorsz);
-CREATE INDEX szavkor_tip ON szavkor (tip);
+CREATE INDEX IF NOT EXISTS szavkor_maz ON szavkor (maz);
+CREATE INDEX IF NOT EXISTS szavkor_taz ON szavkor (taz);
+CREATE INDEX IF NOT EXISTS szavkor_sorsz ON szavkor (sorsz);
+CREATE INDEX IF NOT EXISTS szavkor_tip ON szavkor (tip);
 
 -- Egyéni jelöltek
-CREATE TABLE ejelolt (
+CREATE TABLE IF NOT EXISTS ejelolt (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Megye azonosító
   -- (-> terulet.maz)
@@ -673,13 +673,13 @@ CREATE TABLE ejelolt (
   -- Fénykép azonosító
   fenykep int
 );
-CREATE INDEX ejelolt_maz ON ejelolt (maz);
-CREATE INDEX ejelolt_eid ON ejelolt (eid);
-CREATE INDEX ejelolt_jlcs ON ejelolt (jlcs);
-CREATE INDEX ejelolt_sorsz ON ejelolt (sorsz);
+CREATE INDEX IF NOT EXISTS ejelolt_maz ON ejelolt (maz);
+CREATE INDEX IF NOT EXISTS ejelolt_eid ON ejelolt (eid);
+CREATE INDEX IF NOT EXISTS ejelolt_jlcs ON ejelolt (jlcs);
+CREATE INDEX IF NOT EXISTS ejelolt_sorsz ON ejelolt (sorsz);
 
 -- Országos listák jelöltjei
-CREATE TABLE tlistaj (
+CREATE TABLE IF NOT EXISTS tlistaj (
   internal_id INTEGER PRIMARY KEY NOT NULL,
   -- Országos lista egyedi azonosító
   -- (-> tlista.tlid)
@@ -713,5 +713,5 @@ CREATE TABLE tlistaj (
   -- Fénykép azonosító
   fenykep int
 );
-CREATE INDEX tlistaj_tlid ON tlistaj (tlid);
-CREATE INDEX tlistaj_tjsorsz ON tlistaj (tjsorsz);
+CREATE INDEX IF NOT EXISTS tlistaj_tlid ON tlistaj (tlid);
+CREATE INDEX IF NOT EXISTS tlistaj_tjsorsz ON tlistaj (tjsorsz);
