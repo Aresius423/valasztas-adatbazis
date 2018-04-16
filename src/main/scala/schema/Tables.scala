@@ -21,7 +21,7 @@ trait Tables {
   def ddl = schema
 
   /** Entity class storing rows of table Ejelolt
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param maz Database column MAZ SqlType(VARCHAR), Length(2,true)
    *  @param evk Database column EVK SqlType(VARCHAR), Length(2,true)
    *  @param eid Database column EID SqlType(INTEGER)
@@ -49,8 +49,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(maz), Rep.Some(evk), Rep.Some(eid), Rep.Some(tajaz), dr, drjel, Rep.Some(nev), Rep.Some(unev1), unev2, unevjel, Rep.Some(jlcs), sorsz, Rep.Some(erv), Rep.Some(allapot), fenykep).shaped.<>({r=>import r._; _1.map(_=> EjeloltRow.tupled((_1.get, _2.get, _3.get, _4.get, _5.get, _6, _7, _8.get, _9.get, _10, _11, _12.get, _13, _14.get, _15.get, _16)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column MAZ SqlType(VARCHAR), Length(2,true) */
     val maz: Rep[String] = column[String]("MAZ", O.Length(2,varying=true))
     /** Database column EVK SqlType(VARCHAR), Length(2,true) */
@@ -95,7 +95,7 @@ trait Tables {
   lazy val Ejelolt = new TableQuery(tag => new Ejelolt(tag))
 
   /** Entity class storing rows of table Hatarszamf
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param hszav1 Database column HSZAV1 SqlType(INTEGER)
    *  @param hszav2 Database column HSZAV2 SqlType(INTEGER)
    *  @param hszav3 Database column HSZAV3 SqlType(INTEGER)
@@ -112,8 +112,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(hszav1), Rep.Some(hszav2), Rep.Some(hszav3), Rep.Some(hszav4)).shaped.<>({r=>import r._; _1.map(_=> HatarszamfRow.tupled((_1.get, _2.get, _3.get, _4.get, _5.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column HSZAV1 SqlType(INTEGER) */
     val hszav1: Rep[Int] = column[Int]("HSZAV1")
     /** Database column HSZAV2 SqlType(INTEGER) */
@@ -127,7 +127,7 @@ trait Tables {
   lazy val Hatarszamf = new TableQuery(tag => new Hatarszamf(tag))
 
   /** Entity class storing rows of table Jlcs
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param jlcs Database column JLCS SqlType(INTEGER)
    *  @param nevt Database column NEVT SqlType(VARCHAR), Length(28,true)
    *  @param tag Database column TAG SqlType(INTEGER) */
@@ -143,8 +143,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(jlcs), Rep.Some(nevt), Rep.Some(tag)).shaped.<>({r=>import r._; _1.map(_=> JlcsRow.tupled((_1.get, _2.get, _3.get, _4.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column JLCS SqlType(INTEGER) */
     val jlcs: Rep[Int] = column[Int]("JLCS")
     /** Database column NEVT SqlType(VARCHAR), Length(28,true) */
@@ -159,7 +159,7 @@ trait Tables {
   lazy val Jlcs = new TableQuery(tag => new Jlcs(tag))
 
   /** Entity class storing rows of table Jlcssor
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param tip Database column TIP SqlType(VARCHAR)
    *  @param id Database column ID SqlType(INTEGER)
    *  @param sorsz Database column SORSZ SqlType(INTEGER)
@@ -176,8 +176,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(tip), Rep.Some(id), Rep.Some(sorsz), Rep.Some(szkod)).shaped.<>({r=>import r._; _1.map(_=> JlcssorRow.tupled((_1.get, _2.get, _3.get, _4.get, _5.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column TIP SqlType(VARCHAR) */
     val tip: Rep[Char] = column[Char]("TIP")
     /** Database column ID SqlType(INTEGER) */
@@ -200,7 +200,7 @@ trait Tables {
   lazy val Jlcssor = new TableQuery(tag => new Jlcssor(tag))
 
   /** Entity class storing rows of table Jlcstag
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param jlcs Database column JLCS SqlType(INTEGER)
    *  @param szkod Database column SZKOD SqlType(INTEGER)
    *  @param sorsz Database column SORSZ SqlType(INTEGER) */
@@ -216,8 +216,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(jlcs), Rep.Some(szkod), Rep.Some(sorsz)).shaped.<>({r=>import r._; _1.map(_=> JlcstagRow.tupled((_1.get, _2.get, _3.get, _4.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column JLCS SqlType(INTEGER) */
     val jlcs: Rep[Int] = column[Int]("JLCS")
     /** Database column SZKOD SqlType(INTEGER) */
@@ -236,7 +236,7 @@ trait Tables {
   lazy val Jlcstag = new TableQuery(tag => new Jlcstag(tag))
 
   /** Entity class storing rows of table Kodok
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param kodcsop Database column KODCSOP SqlType(VARCHAR), Length(9,true)
    *  @param kod Database column KOD SqlType(VARCHAR), Length(2,true)
    *  @param szoveg Database column SZOVEG SqlType(VARCHAR), Length(73,true) */
@@ -252,8 +252,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(kodcsop), Rep.Some(kod), Rep.Some(szoveg)).shaped.<>({r=>import r._; _1.map(_=> KodokRow.tupled((_1.get, _2.get, _3.get, _4.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column KODCSOP SqlType(VARCHAR), Length(9,true) */
     val kodcsop: Rep[String] = column[String]("KODCSOP", O.Length(9,varying=true))
     /** Database column KOD SqlType(VARCHAR), Length(2,true) */
@@ -284,8 +284,8 @@ trait Tables {
   class Nevjegyz(_tableTag: Tag) extends profile.api.Table[NevjegyzRow](_tableTag, "NEVJEGYZ") {
     def * = internalId :: nszossz :: nszegy :: nszplist :: nsznemz :: nkossz :: nkegyeni :: nkplist :: nknemz :: naossz :: naegyeni :: naplist :: nanemz :: nlsz :: nnossz :: nbolgar :: ngorog :: nhorvat :: nlengyel :: nnemet :: normeny :: nroma :: nroman :: nruszin :: nszerb :: nszlovak :: nszloven :: nukran :: HNil
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column NSZOSSZ SqlType(INTEGER) */
     val nszossz: Rep[Int] = column[Int]("NSZOSSZ")
     /** Database column NSZEGY SqlType(INTEGER) */
@@ -345,7 +345,7 @@ trait Tables {
   lazy val Nevjegyz = new TableQuery(tag => new Nevjegyz(tag))
 
   /** Entity class storing rows of table Oevk
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param maz Database column MAZ SqlType(VARCHAR), Length(2,true)
    *  @param evk Database column EVK SqlType(VARCHAR), Length(2,true)
    *  @param szekh Database column SZEKH SqlType(VARCHAR), Length(17,true)
@@ -362,8 +362,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(maz), Rep.Some(evk), Rep.Some(szekh), szekhk).shaped.<>({r=>import r._; _1.map(_=> OevkRow.tupled((_1.get, _2.get, _3.get, _4.get, _5)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column MAZ SqlType(VARCHAR), Length(2,true) */
     val maz: Rep[String] = column[String]("MAZ", O.Length(2,varying=true))
     /** Database column EVK SqlType(VARCHAR), Length(2,true) */
@@ -380,7 +380,7 @@ trait Tables {
   lazy val Oevk = new TableQuery(tag => new Oevk(tag))
 
   /** Entity class storing rows of table Partdelegalt
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param id Database column ID SqlType(VARCHAR), Length(24,true)
    *  @param sorszm Database column SORSZM SqlType(INTEGER)
    *  @param megye Database column MEGYE SqlType(VARCHAR), Length(22,true)
@@ -407,8 +407,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(id), Rep.Some(sorszm), Rep.Some(megye), Rep.Some(telepls), Rep.Some(maz), Rep.Some(taz), Rep.Some(bizottsgszintje), szavazkroevkszma, Rep.Some(sorsz), Rep.Some(vlasztsnapja), Rep.Some(vlasztstpusa), Rep.Some(megbz), jellcsoport, jellcsopid).shaped.<>({r=>import r._; _1.map(_=> PartdelegaltRow.tupled((_1.get, _2.get, _3.get, _4.get, _5.get, _6.get, _7.get, _8.get, _9, _10.get, _11.get, _12.get, _13.get, _14, _15)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column ID SqlType(VARCHAR), Length(24,true) */
     val id: Rep[String] = column[String]("ID", O.Length(24,varying=true))
     /** Database column SORSZM SqlType(INTEGER) */
@@ -469,8 +469,8 @@ trait Tables {
   class Szavf(_tableTag: Tag) extends profile.api.Table[SzavfRow](_tableTag, "SZAVF") {
     def * = internalId :: jfid :: valtip :: maz :: taz :: sorsz :: a :: b :: bo :: c :: d :: e :: f :: g :: i1 :: i2 :: i3 :: j :: o :: k1 :: k2 :: l :: m :: n :: pa :: pf :: po :: pk :: pl :: pm :: pn :: na :: nf :: no :: nk :: nl :: nm :: nn :: HNil
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column JFID SqlType(INTEGER) */
     val jfid: Rep[Int] = column[Int]("JFID")
     /** Database column VALTIP SqlType(VARCHAR) */
@@ -561,7 +561,7 @@ trait Tables {
   lazy val Szavf = new TableQuery(tag => new Szavf(tag))
 
   /** Entity class storing rows of table Szavkor
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param maz Database column MAZ SqlType(VARCHAR), Length(2,true)
    *  @param taz Database column TAZ SqlType(VARCHAR), Length(3,true)
    *  @param sorsz Database column SORSZ SqlType(VARCHAR), Length(3,true)
@@ -581,8 +581,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(maz), taz, sorsz, evk, Rep.Some(tip), Rep.Some(cimt), Rep.Some(cimk)).shaped.<>({r=>import r._; _1.map(_=> SzavkorRow.tupled((_1.get, _2.get, _3, _4, _5, _6.get, _7.get, _8.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column MAZ SqlType(VARCHAR), Length(2,true) */
     val maz: Rep[String] = column[String]("MAZ", O.Length(2,varying=true))
     /** Database column TAZ SqlType(VARCHAR), Length(3,true) */
@@ -611,7 +611,7 @@ trait Tables {
   lazy val Szavkor = new TableQuery(tag => new Szavkor(tag))
 
   /** Entity class storing rows of table Szavlf
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param jfid Database column JFID SqlType(INTEGER)
    *  @param jlid Database column JLID SqlType(INTEGER)
    *  @param nemz Database column NEMZ SqlType(INTEGER)
@@ -634,8 +634,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(jfid), Rep.Some(jlid), Rep.Some(nemz), Rep.Some(pa), Rep.Some(pf), Rep.Some(po), Rep.Some(pk), Rep.Some(pl), Rep.Some(pm), Rep.Some(pn)).shaped.<>({r=>import r._; _1.map(_=> SzavlfRow.tupled((_1.get, _2.get, _3.get, _4.get, _5.get, _6.get, _7.get, _8.get, _9.get, _10.get, _11.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column JFID SqlType(INTEGER) */
     val jfid: Rep[Int] = column[Int]("JFID")
     /** Database column JLID SqlType(INTEGER) */
@@ -666,7 +666,7 @@ trait Tables {
   lazy val Szavlf = new TableQuery(tag => new Szavlf(tag))
 
   /** Entity class storing rows of table Szavt
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param jfid Database column JFID SqlType(INTEGER)
    *  @param jlid Database column JLID SqlType(INTEGER)
    *  @param szav Database column SZAV SqlType(INTEGER) */
@@ -682,8 +682,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(jfid), Rep.Some(jlid), Rep.Some(szav)).shaped.<>({r=>import r._; _1.map(_=> SzavtRow.tupled((_1.get, _2.get, _3.get, _4.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column JFID SqlType(INTEGER) */
     val jfid: Rep[Int] = column[Int]("JFID")
     /** Database column JLID SqlType(INTEGER) */
@@ -714,8 +714,8 @@ trait Tables {
   class Szeredmf(_tableTag: Tag) extends profile.api.Table[SzeredmfRow](_tableTag, "SZEREDMF") {
     def * = internalId :: sfid :: oszint :: sfmaz :: sfevk :: valtip :: forr :: jogi :: eredm :: a :: b :: c :: d :: e :: f :: ie :: ilis :: ilev :: j :: ke :: klis :: m :: n :: jojkv :: feldar :: levell :: levszl :: eid :: HNil
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column SFID SqlType(INTEGER) */
     val sfid: Rep[Int] = column[Int]("SFID")
     /** Database column OSZINT SqlType(INTEGER) */
@@ -784,7 +784,7 @@ trait Tables {
   lazy val Szeredmf = new TableQuery(tag => new Szeredmf(tag))
 
   /** Entity class storing rows of table Szeredmt
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param sfid Database column SFID SqlType(INTEGER)
    *  @param jlid Database column JLID SqlType(INTEGER)
    *  @param szav Database column SZAV SqlType(INTEGER)
@@ -804,8 +804,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(sfid), Rep.Some(jlid), Rep.Some(szav), Rep.Some(torsz), Rep.Some(mandszav), Rep.Some(hatar), Rep.Some(mand)).shaped.<>({r=>import r._; _1.map(_=> SzeredmtRow.tupled((_1.get, _2.get, _3.get, _4.get, _5.get, _6.get, _7.get, _8.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column SFID SqlType(INTEGER) */
     val sfid: Rep[Int] = column[Int]("SFID")
     /** Database column JLID SqlType(INTEGER) */
@@ -830,7 +830,7 @@ trait Tables {
   lazy val Szeredmt = new TableQuery(tag => new Szeredmt(tag))
 
   /** Entity class storing rows of table Szervezet
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param szkod Database column SZKOD SqlType(INTEGER)
    *  @param szpntip Database column SZPNTIP SqlType(VARCHAR)
    *  @param nemz Database column NEMZ SqlType(INTEGER)
@@ -853,8 +853,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(szkod), szpntip, nemz, Rep.Some(hnev1), hnev2, hnev3, Rep.Some(tnev), Rep.Some(rovid), Rep.Some(allapot), tajaz).shaped.<>({r=>import r._; _1.map(_=> SzervezetRow.tupled((_1.get, _2.get, _3, _4, _5.get, _6, _7, _8.get, _9.get, _10.get, _11)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column SZKOD SqlType(INTEGER) */
     val szkod: Rep[Int] = column[Int]("SZKOD")
     /** Database column SZPNTIP SqlType(VARCHAR) */
@@ -887,7 +887,7 @@ trait Tables {
   lazy val Szervezet = new TableQuery(tag => new Szervezet(tag))
 
   /** Entity class storing rows of table Szkepv
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param mtip Database column MTIP SqlType(INTEGER)
    *  @param jlid Database column JLID SqlType(INTEGER)
    *  @param lsorsz Database column LSORSZ SqlType(INTEGER) */
@@ -903,8 +903,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(mtip), Rep.Some(jlid), Rep.Some(lsorsz)).shaped.<>({r=>import r._; _1.map(_=> SzkepvRow.tupled((_1.get, _2.get, _3.get, _4.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column MTIP SqlType(INTEGER) */
     val mtip: Rep[Int] = column[Int]("MTIP")
     /** Database column JLID SqlType(INTEGER) */
@@ -923,7 +923,7 @@ trait Tables {
   lazy val Szkepv = new TableQuery(tag => new Szkepv(tag))
 
   /** Entity class storing rows of table Sznapi
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param valtip Database column VALTIP SqlType(VARCHAR)
    *  @param maz Database column MAZ SqlType(VARCHAR), Length(2,true)
    *  @param taz Database column TAZ SqlType(VARCHAR), Length(3,true)
@@ -942,8 +942,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(valtip), Rep.Some(maz), Rep.Some(taz), Rep.Some(sorsz), Rep.Some(a), Rep.Some(f)).shaped.<>({r=>import r._; _1.map(_=> SznapiRow.tupled((_1.get, _2.get, _3.get, _4.get, _5.get, _6.get, _7.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column VALTIP SqlType(VARCHAR) */
     val valtip: Rep[Char] = column[Char]("VALTIP")
     /** Database column MAZ SqlType(VARCHAR), Length(2,true) */
@@ -970,7 +970,7 @@ trait Tables {
   lazy val Sznapi = new TableQuery(tag => new Sznapi(tag))
 
   /** Entity class storing rows of table Sznapilf
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param valtip Database column VALTIP SqlType(VARCHAR)
    *  @param maz Database column MAZ SqlType(VARCHAR), Length(2,true)
    *  @param taz Database column TAZ SqlType(VARCHAR), Length(3,true)
@@ -990,8 +990,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(valtip), Rep.Some(maz), Rep.Some(taz), Rep.Some(sorsz), Rep.Some(nemz), Rep.Some(a), Rep.Some(f)).shaped.<>({r=>import r._; _1.map(_=> SznapilfRow.tupled((_1.get, _2.get, _3.get, _4.get, _5.get, _6.get, _7.get, _8.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column VALTIP SqlType(VARCHAR) */
     val valtip: Rep[Char] = column[Char]("VALTIP")
     /** Database column MAZ SqlType(VARCHAR), Length(2,true) */
@@ -1020,7 +1020,7 @@ trait Tables {
   lazy val Sznapilf = new TableQuery(tag => new Sznapilf(tag))
 
   /** Entity class storing rows of table Telep
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param maz Database column MAZ SqlType(VARCHAR), Length(2,true)
    *  @param taz Database column TAZ SqlType(VARCHAR), Length(3,true)
    *  @param tnevi Database column TNEVI SqlType(VARCHAR), Length(23,true)
@@ -1039,8 +1039,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(maz), Rep.Some(taz), Rep.Some(tnevi), Rep.Some(tnev), tker, Rep.Some(ttip)).shaped.<>({r=>import r._; _1.map(_=> TelepRow.tupled((_1.get, _2.get, _3.get, _4.get, _5.get, _6, _7.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column MAZ SqlType(VARCHAR), Length(2,true) */
     val maz: Rep[String] = column[String]("MAZ", O.Length(2,varying=true))
     /** Database column TAZ SqlType(VARCHAR), Length(3,true) */
@@ -1065,7 +1065,7 @@ trait Tables {
   lazy val Telep = new TableQuery(tag => new Telep(tag))
 
   /** Entity class storing rows of table Terulet
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param maz Database column MAZ SqlType(VARCHAR), Length(2,true)
    *  @param mnev Database column MNEV SqlType(VARCHAR), Length(22,true)
    *  @param mrnev Database column MRNEV SqlType(VARCHAR), Length(10,true) */
@@ -1081,8 +1081,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(maz), Rep.Some(mnev), Rep.Some(mrnev)).shaped.<>({r=>import r._; _1.map(_=> TeruletRow.tupled((_1.get, _2.get, _3.get, _4.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column MAZ SqlType(VARCHAR), Length(2,true) */
     val maz: Rep[String] = column[String]("MAZ", O.Length(2,varying=true))
     /** Database column MNEV SqlType(VARCHAR), Length(22,true) */
@@ -1097,7 +1097,7 @@ trait Tables {
   lazy val Terulet = new TableQuery(tag => new Terulet(tag))
 
   /** Entity class storing rows of table Tlista
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param tlid Database column TLID SqlType(INTEGER)
    *  @param ltip Database column LTIP SqlType(VARCHAR)
    *  @param nemz Database column NEMZ SqlType(INTEGER)
@@ -1118,8 +1118,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(tlid), Rep.Some(ltip), nemz, Rep.Some(jlcs), Rep.Some(tnev), sorsz, Rep.Some(erv), Rep.Some(allapot)).shaped.<>({r=>import r._; _1.map(_=> TlistaRow.tupled((_1.get, _2.get, _3.get, _4, _5.get, _6.get, _7, _8.get, _9.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column TLID SqlType(INTEGER) */
     val tlid: Rep[Int] = column[Int]("TLID")
     /** Database column LTIP SqlType(VARCHAR) */
@@ -1150,7 +1150,7 @@ trait Tables {
   lazy val Tlista = new TableQuery(tag => new Tlista(tag))
 
   /** Entity class storing rows of table Tlistaj
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param tlid Database column TLID SqlType(INTEGER)
    *  @param tjsorsz Database column TJSORSZ SqlType(INTEGER)
    *  @param tajaz Database column TAJAZ SqlType(VARCHAR), Length(40,true)
@@ -1174,8 +1174,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(tlid), Rep.Some(tjsorsz), Rep.Some(tajaz), dr, drjel, Rep.Some(nev), Rep.Some(unev1), unev2, unevjel, Rep.Some(allapot), fenykep).shaped.<>({r=>import r._; _1.map(_=> TlistajRow.tupled((_1.get, _2.get, _3.get, _4.get, _5, _6, _7.get, _8.get, _9, _10, _11.get, _12)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column TLID SqlType(INTEGER) */
     val tlid: Rep[Int] = column[Int]("TLID")
     /** Database column TJSORSZ SqlType(INTEGER) */
@@ -1208,7 +1208,7 @@ trait Tables {
   lazy val Tlistaj = new TableQuery(tag => new Tlistaj(tag))
 
   /** Entity class storing rows of table Verzio
-   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey
+   *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey
    *  @param ver Database column VER SqlType(VARCHAR), Length(19,true)
    *  @param tjel Database column TJEL SqlType(INTEGER)
    *  @param eng1 Database column ENG1 SqlType(INTEGER)
@@ -1228,8 +1228,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(internalId), Rep.Some(ver), Rep.Some(tjel), Rep.Some(eng1), Rep.Some(eng2), Rep.Some(feldar), Rep.Some(levell), Rep.Some(levszl)).shaped.<>({r=>import r._; _1.map(_=> VerzioRow.tupled((_1.get, _2.get, _3.get, _4.get, _5.get, _6.get, _7.get, _8.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column INTERNAL_ID SqlType(INTEGER), PrimaryKey */
-    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.PrimaryKey)
+    /** Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey */
+    val internalId: Rep[Int] = column[Int]("INTERNAL_ID", O.AutoInc, O.PrimaryKey)
     /** Database column VER SqlType(VARCHAR), Length(19,true) */
     val ver: Rep[String] = column[String]("VER", O.Length(19,varying=true))
     /** Database column TJEL SqlType(INTEGER) */
