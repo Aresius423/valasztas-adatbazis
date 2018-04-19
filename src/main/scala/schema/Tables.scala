@@ -16,7 +16,7 @@ trait Tables {
   import slick.jdbc.{GetResult => GR}
 
   /** DDL for all tables. Call .create to execute. */
-  lazy val schema: profile.SchemaDescription = Array(Ejelolt.schema, Hatarszamf.schema, Jlcs.schema, Jlcssor.schema, Jlcstag.schema, Kodok.schema, Nevjegyz.schema, Oevk.schema, Partdelegalt.schema, Szavf.schema, Szavkor.schema, Szavlf.schema, Szavt.schema, Szeredmf.schema, Szeredmt.schema, Szervezet.schema, Szkepv.schema, Sznapi.schema, Sznapilf.schema, Telep.schema, Terulet.schema, Tlista.schema, Tlistaj.schema, Verzio.schema).reduceLeft(_ ++ _)
+  lazy val schema: profile.SchemaDescription = Array(Ejelolt.schema, Hatarszamf.schema, Jlcs.schema, Jlcssor.schema, Jlcstag.schema, Kodok.schema, Nevjegyz.schema, Oevk.schema, Oevk2014.schema, Partdelegalt.schema, Szavf.schema, Szavkor.schema, Szavlf.schema, Szavt.schema, Szeredmf.schema, Szeredmt.schema, Szervezet.schema, Szkepv.schema, Sznapi.schema, Sznapilf.schema, Telep.schema, Terulet.schema, Tlista.schema, Tlistaj.schema, Verzio.schema).reduceLeft(_ ++ _)
   @deprecated("Use .schema instead of .ddl", "3.0")
   def ddl = schema
 
@@ -378,6 +378,47 @@ trait Tables {
   }
   /** Collection-like TableQuery object for table Oevk */
   lazy val Oevk = new TableQuery(tag => new Oevk(tag))
+
+  /** Entity class storing rows of table Oevk2014
+   *  @param id Database column ID SqlType(INTEGER)
+   *  @param maz Database column MAZ SqlType(VARCHAR), Length(2,true)
+   *  @param evk Database column EVK SqlType(VARCHAR), Length(3,true)
+   *  @param jelolt Database column JELOLT SqlType(VARCHAR), Length(35,true)
+   *  @param part Database column PART SqlType(VARCHAR), Length(21,true)
+   *  @param szavazat Database column SZAVAZAT SqlType(INTEGER)
+   *  @param szavPct Database column SZAV_PCT SqlType(DECIMAL)
+   *  @param gyoztes Database column GYOZTES SqlType(TINYINT) */
+  case class Oevk2014Row(id: Option[Int], maz: String, evk: String, jelolt: String, part: String, szavazat: Int, szavPct: scala.math.BigDecimal, gyoztes: Byte)
+  /** GetResult implicit for fetching Oevk2014Row objects using plain SQL queries */
+  implicit def GetResultOevk2014Row(implicit e0: GR[Option[Int]], e1: GR[String], e2: GR[Int], e3: GR[scala.math.BigDecimal], e4: GR[Byte]): GR[Oevk2014Row] = GR{
+    prs => import prs._
+    Oevk2014Row.tupled((<<?[Int], <<[String], <<[String], <<[String], <<[String], <<[Int], <<[scala.math.BigDecimal], <<[Byte]))
+  }
+  /** Table description of table OEVK_2014. Objects of this class serve as prototypes for rows in queries. */
+  class Oevk2014(_tableTag: Tag) extends profile.api.Table[Oevk2014Row](_tableTag, "OEVK_2014") {
+    def * = (id, maz, evk, jelolt, part, szavazat, szavPct, gyoztes) <> (Oevk2014Row.tupled, Oevk2014Row.unapply)
+    /** Maps whole row to an option. Useful for outer joins. */
+    def ? = (id, Rep.Some(maz), Rep.Some(evk), Rep.Some(jelolt), Rep.Some(part), Rep.Some(szavazat), Rep.Some(szavPct), Rep.Some(gyoztes)).shaped.<>({r=>import r._; _2.map(_=> Oevk2014Row.tupled((_1, _2.get, _3.get, _4.get, _5.get, _6.get, _7.get, _8.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
+
+    /** Database column ID SqlType(INTEGER) */
+    val id: Rep[Option[Int]] = column[Option[Int]]("ID")
+    /** Database column MAZ SqlType(VARCHAR), Length(2,true) */
+    val maz: Rep[String] = column[String]("MAZ", O.Length(2,varying=true))
+    /** Database column EVK SqlType(VARCHAR), Length(3,true) */
+    val evk: Rep[String] = column[String]("EVK", O.Length(3,varying=true))
+    /** Database column JELOLT SqlType(VARCHAR), Length(35,true) */
+    val jelolt: Rep[String] = column[String]("JELOLT", O.Length(35,varying=true))
+    /** Database column PART SqlType(VARCHAR), Length(21,true) */
+    val part: Rep[String] = column[String]("PART", O.Length(21,varying=true))
+    /** Database column SZAVAZAT SqlType(INTEGER) */
+    val szavazat: Rep[Int] = column[Int]("SZAVAZAT")
+    /** Database column SZAV_PCT SqlType(DECIMAL) */
+    val szavPct: Rep[scala.math.BigDecimal] = column[scala.math.BigDecimal]("SZAV_PCT")
+    /** Database column GYOZTES SqlType(TINYINT) */
+    val gyoztes: Rep[Byte] = column[Byte]("GYOZTES")
+  }
+  /** Collection-like TableQuery object for table Oevk2014 */
+  lazy val Oevk2014 = new TableQuery(tag => new Oevk2014(tag))
 
   /** Entity class storing rows of table Partdelegalt
    *  @param internalId Database column INTERNAL_ID SqlType(INTEGER), AutoInc, PrimaryKey

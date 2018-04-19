@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS szkepv (
   -- (-> ejelolt.eid / tlista.tlid)
   jlid int NOT NULL,
   -- Listás jelölt sorszáma a listán
+  -- (-> tlistaj.tjsorsz)
   lsorsz int NOT NULL
 );
 CREATE INDEX IF NOT EXISTS szkepv_mtip ON szkepv (mtip);
@@ -45,6 +46,7 @@ CREATE INDEX IF NOT EXISTS sznapi_sorsz ON sznapi (sorsz);
 CREATE TABLE IF NOT EXISTS szavlf (
   internal_id INTEGER PRIMARY KEY AUTO_INCREMENT,
   --  Szavazóköri „fej” adatok egyedi azonosítója
+  -- (-> szavf.jfid)
   jfid int NOT NULL,
   -- Jelölt, lista jelölés egyedi azonosító
   -- (-> ejelolt.eid / tlista.tlid)
@@ -71,21 +73,44 @@ CREATE TABLE IF NOT EXISTS szavlf (
 CREATE INDEX IF NOT EXISTS szavlf_jfid ON szavlf (jfid);
 CREATE INDEX IF NOT EXISTS szavlf_jlid ON szavlf (jlid);
 
+-- Pártdelegáltak
 CREATE TABLE IF NOT EXISTS partdelegalt (
   internal_id INTEGER PRIMARY KEY AUTO_INCREMENT,
   id varchar(24) NOT NULL,
+  -- Sorszám
   sorszm int NOT NULL,
+  -- Megye
   megye varchar(22) NOT NULL,
+  -- Település
   telepls varchar(20) NOT NULL,
+  -- Megye azonosító
+  -- (-> terulet.maz)
   maz varchar(2) NOT NULL,
+  -- Település sorszám megyén belül
+  -- (-> telep.taz)
   taz varchar(3) NOT NULL,
+  -- Bizottság szintje
+  -- (SZSZB: szavazatszámláló bizottság, HVB: helyi választási bizottság,
+  --  OEVB: országgyűlési egyéni választókerületi választási bizottság,
+  --  NVB: Nemzeti Választási Bizottság)
   bizottsgszintje varchar(5) NOT NULL,
+  -- Szavazókör/OEVK száma
+  -- (-> oevk.evk)
   szavazkroevkszma varchar(3),
+  -- Szavazókör sorszám településen belül
+  -- (-> szavkor.sorsz)
   sorsz varchar(3) NOT NULL,
+  -- Választás napja (EEEE.HH.NN)
   vlasztsnapja varchar(10) NOT NULL,
+  -- Választás típusa ("ORSZÁGGYŰLÉSI KÉPVISELŐ VÁLASZTÁS")
   vlasztstpusa varchar(33) NOT NULL,
+  -- Megbízó
+  -- (->  szervezet.tnev?)
   megbz varchar(44) NOT NULL,
+  -- Jelölőcsoport
   jellcsoport varchar(20),
+  -- Jelölőcsoport azonosító
+  -- (-> jlcs.jlcs)
   jellcsopid int
 );
 CREATE INDEX IF NOT EXISTS partdelegalt_id ON partdelegalt (id);
@@ -254,7 +279,8 @@ CREATE TABLE IF NOT EXISTS tlista (
   jlcs int NOT NULL,
   -- Listaállító párt, országos nemzetiségi önkormányzat neve
   tnev varchar(100) NOT NULL,
-  -- Lista sorszáma (a szavazólapon csak akkor szerepel ha értéke >0)
+  -- Lista sorszáma a szavazólapon
+  -- (NULL: nem szerepel, 1: kisebbségi önkormányzatok)
   sorsz int,
   -- Lista érvényesen szerepel a szavazólapon jelző
   -- (0: Szavazólapon nem szerepel, 1: Szerepel a szavazólapon,
@@ -411,8 +437,10 @@ CREATE TABLE IF NOT EXISTS szeredmf (
   --  53: Listás szavazatok (levélben))
   oszint int NOT NULL,
   -- Megye azonosító
+  -- (-> terulet.maz)
   sfmaz varchar(2),
   -- OEVK sorszám megyén belül
+  -- (-> oevk.evk)
   sfevk varchar(2),
   -- Választás típusa
   -- (J: Egyéni választókerületi választás, L: Listás választás)
@@ -654,7 +682,7 @@ CREATE TABLE IF NOT EXISTS ejelolt (
   -- Jelöltet állító JLCS kódja
   -- (jlcs.jlcs)
   jlcs int NOT NULL,
-  -- Jelölt szavazólapi sorszáma (csak > 0 esetén szerepel a szavazólapon a jelölt)
+  -- Jelölt szavazólapi sorszáma (NULL: nem szerepel a szavazólapon)
   sorsz int,
   -- Jelölt érvényesen szerepel a szavazólapon jelző
   -- (0: Szavazólapon nem szerepel, 1: Szerepel a szavazólapon,
@@ -715,3 +743,25 @@ CREATE TABLE IF NOT EXISTS tlistaj (
 );
 CREATE INDEX IF NOT EXISTS tlistaj_tlid ON tlistaj (tlid);
 CREATE INDEX IF NOT EXISTS tlistaj_tjsorsz ON tlistaj (tjsorsz);
+
+-- 2014-es egyéni szavazatok
+-- https://gitlab.com/gregoriosz/valasztas_hu/blob/master/oevk14.R alapján
+CREATE TABLE IF NOT EXISTS oevk_2014 (
+  id int,
+  -- Megye
+  -- (-> terulet.maz)
+  maz varchar(2) NOT NULL,
+  -- OEVK azonosító
+  -- (-> oevk.evk)
+  evk varchar(3) NOT NULL,
+  -- Jelölt neve
+  jelolt varchar(35) NOT NULL,
+  -- Párt neve
+  part varchar(21) NOT NULL,
+  -- Szavazatok száma
+  szavazat int NOT NULL,
+  -- Szavazatok százalékos aránya
+  szav_pct numeric(4, 2) NOT NULL,
+  -- Győzött-e? (0/1)
+  gyoztes tinyint NOT NULL
+);
